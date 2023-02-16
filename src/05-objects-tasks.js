@@ -23,7 +23,7 @@
 function Rectangle(width, height) {
   this.width = width;
   this.height = height;
-  this.getArea = function () {
+  this.getArea = function a() {
     return this.width * this.height;
   };
 }
@@ -115,102 +115,35 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
-class CssSelectorBuilder {
-  constructor() {
-    this.elementType = '';
-    this.idName = '';
-    this.classNames = [];
-    this.attributes = [];
-    this.pseudoClasses = [];
-    this.pseudoElem = '';
-    this.selector1 = null;
-    this.selector2 = null;
-    this.combinator = '';
-  }
+const cssSelectorBuilder = {
+  element(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-  clean() {
-    this.elementType = '';
-    this.idName = '';
-    this.classNames = [];
-    this.attributes = [];
-    this.pseudoClasses = [];
-    this.pseudoElem = '';
-    this.selector1 = null;
-    this.selector2 = null;
-    this.combinator = '';
-  }
+  id(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-  element(value) {
-    if (!this.elementType) {
-      this.elementType = value;
-    }
-    return this;
-  }
+  class(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-  id(value) {
-    this.idName = value;
-    return this;
-  }
+  attr(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-  class(value) {
-    this.classNames = [...this.classNames, value];
-    return this;
-  }
+  pseudoClass(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-  attr(value) {
-    this.attributes = [...this.attributes, value];
-    return this;
-  }
+  pseudoElement(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-  pseudoClass(value) {
-    this.pseudoClasses = [...this.pseudoClasses, value];
-    return this;
-  }
-
-  pseudoElement(value) {
-    this.pseudoElem = value;
-    return this;
-  }
-
-  combine(combinator) {
-    this.combinator = combinator;
-    return this;
-  }
-
-  stringify() {
-    let result = '';
-
-    if (this.selector1) {
-      result += this.selector1.stringify();
-      result += ` ${this.combinator} `;
-      result += this.selector2.stringify();
-    } else {
-      if (this.elementType) {
-        result += this.elementType;
-      }
-      if (this.idName) {
-        result += `#${this.idName}`;
-      }
-      if (this.classNames.length > 0) {
-        result += `.${this.classNames.join('.')}`;
-      }
-      if (this.attributes.length > 0) {
-        result += (`[${this.attributes.join('')}]`);
-      }
-      if (this.pseudoClasses.length > 0) {
-        result += `:${this.pseudoClasses.join(':')}`;
-      }
-      if (this.pseudoElem) {
-        result += `::${this.pseudoElem}`;
-      }
-    }
-    this.clean();
-    return result;
-  }
-}
-
-const cssSelectorBuilder = new CssSelectorBuilder();
-
+  combine(/* selector1, combinator, selector2 */) {
+    throw new Error('Not implemented');
+  },
+};
 module.exports = {
   Rectangle,
   getJSON,
